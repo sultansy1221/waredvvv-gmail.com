@@ -47,3 +47,8 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# Native Android build caches and generated delivery files
+/apps/max-share-android/.gradle/
+/apps/max-share-android/**/build/
+/generated-artifacts/

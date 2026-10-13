@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "BBhoIKlfpwYnL9zZTYIK8"
+uri = "file://generated-artifacts/Max-Share-2.3.0-debug.apk"
+type = "unspecified"
+title = "Max Share 2.3.0 — APK تجريبي"
+description = "نسخة Android Debug قابلة للتثبيت، الإصدار 2.3.0 (23)، بحجم 3,184,494 بايت. SHA-256: 6b4b2a1c27b7d1a119df26a9f2a704e289ae24a3d8d2d83b8989e616941ac230"
+logical_id = "cc3ba832-72cf-4e5f-a6e5-a38affedef9f"
+content_hash = "sha256:6b4b2a1c27b7d1a119df26a9f2a704e289ae24a3d8d2d83b8989e616941ac230"
+size = 3184494
+mtime_ms = 1791850401316
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f5b02991-8bfa-416f-885c-e3713e82925b/cc3ba832-72cf-4e5f-a6e5-a38affedef9f/6205c0be-d9fb-42cb-95eb-2138932eb172"
+storage_version_token = "1791850438363066"
+content_type = "application/octet-stream"
