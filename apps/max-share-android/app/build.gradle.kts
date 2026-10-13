@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace = "com.portablefileserver"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.portablefileserver"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 23
-        versionName = "2.3.0"
+        targetSdk = 36
+        versionCode = 24
+        versionName = "2.3.1"
     }
 
     buildTypes {

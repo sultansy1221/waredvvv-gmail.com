@@ -34,6 +34,10 @@ import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.portablefileserver.data.PrefsManager
 import com.portablefileserver.qr.QrGenerator
 import com.portablefileserver.server.ServerRuntime
@@ -485,11 +489,17 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         prefs = PrefsManager(this)
 
-        window.statusBarColor = cBg
-        window.navigationBarColor = cBg
-        @Suppress("DEPRECATION")
-        window.decorView.systemUiVisibility = if (isDarkMode) 0 else
-            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        window.statusBarColor = Color.TRANSPARENT
+        window.navigationBarColor = Color.TRANSPARENT
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isStatusBarContrastEnforced = false
+            window.isNavigationBarContrastEnforced = false
+        }
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            isAppearanceLightStatusBars = !isDarkMode
+            isAppearanceLightNavigationBars = !isDarkMode
+        }
 
         val col = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
@@ -795,10 +805,18 @@ class MainActivity : Activity() {
         aboutCol.addView(technical, lp(top = 12))
 
         drawerOverlay = createDrawer()
-        val screenHost = FrameLayout(this)
+        val screenHost = FrameLayout(this).apply { setBackgroundColor(cBg) }
+        ViewCompat.setOnApplyWindowInsetsListener(screenHost) { view, insets ->
+            val safeInsets = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.ime()
+            )
+            view.setPadding(safeInsets.left, safeInsets.top, safeInsets.right, safeInsets.bottom)
+            insets
+        }
         screenHost.addView(root, FrameLayout.LayoutParams(-1, -1))
         screenHost.addView(drawerOverlay, FrameLayout.LayoutParams(-1, -1))
         setContentView(screenHost)
+        ViewCompat.requestApplyInsets(screenHost)
         selectTab(0)
     }
 
